@@ -1,0 +1,41 @@
+{
+  "name": "enquirer-question",
+  "description": "Question object, used by Enquirer and prompt plugins.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/enquirer-question",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/enquirer-question",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/enquirer-question/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "enquirer",
+    "question"
+  ],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-istanbul": "^1.1.0",
+    "gulp-mocha": "^3.0.1",
+    "gulp-unused": "^0.2.0"
+  },
+  "dependencies": {
+    "clone-deep": "^0.2.4",
+    "define-property": "^0.2.5",
+    "extend-shallow": "^2.0.1",
+    "kind-of": "^3.0.4",
+    "lazy-cache": "^2.0.1"
+  }
+}
