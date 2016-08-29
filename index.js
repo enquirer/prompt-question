@@ -13,7 +13,7 @@ function Question(name, message, options) {
   }
   this.isQuestion = true;
   this.type = 'input';
-  assign(this, {name, message, options});
+  assign(this, {name: name, message: message, options: options});
 }
 
 Question.prototype.clone = function() {
