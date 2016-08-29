@@ -1,6 +1,6 @@
 'use strict';
 
-var Choices = require('enquirer-choices');
+var Choices = require('prompt-choices');
 var utils = require('./lib/utils');
 
 /**

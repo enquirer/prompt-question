@@ -2,16 +2,18 @@
   "name": "enquirer-question",
   "description": "Question object, used by Enquirer and prompt plugins.",
   "version": "0.1.0",
-  "homepage": "https://github.com/jonschlinkert/enquirer-question",
+  "homepage": "https://github.com/enquirer/enquirer-question",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "jonschlinkert/enquirer-question",
+  "repository": "enquirer/enquirer-question",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/enquirer-question/issues"
+    "url": "https://github.com/enquirer/enquirer-question/issues"
   },
   "license": "MIT",
   "files": [
     "index.js",
-    "LICENSE"
+    "lib",
+    "LICENSE",
+    "README.md"
   ],
   "main": "index.js",
   "engines": {
@@ -20,22 +22,69 @@
   "scripts": {
     "test": "mocha"
   },
-  "keywords": [
-    "enquirer",
-    "question"
-  ],
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-istanbul": "^1.1.0",
-    "gulp-mocha": "^3.0.1",
-    "gulp-unused": "^0.2.0"
-  },
   "dependencies": {
     "clone-deep": "^0.2.4",
     "define-property": "^0.2.5",
     "extend-shallow": "^2.0.1",
     "kind-of": "^3.0.4",
     "lazy-cache": "^2.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-format-md": "^0.1.10",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-unused": "^0.2.0"
+  },
+  "keywords": [
+    "answer",
+    "answers",
+    "ask",
+    "bar",
+    "bottom",
+    "checkbox",
+    "choice",
+    "cli",
+    "command",
+    "enquirer",
+    "input",
+    "inquire",
+    "inquirer",
+    "interact",
+    "list",
+    "menu",
+    "password",
+    "prompt",
+    "prompts",
+    "question",
+    "readline",
+    "stdin",
+    "stdout",
+    "terminal",
+    "tty",
+    "ui"
+  ],
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": [
+        "enquirer"
+      ]
+    },
+    "reflinks": [
+      "verb",
+      "verb-generate-readme"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
