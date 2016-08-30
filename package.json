@@ -1,7 +1,7 @@
 {
   "name": "enquirer-question",
   "description": "Question object, used by Enquirer and prompt plugins.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "homepage": "https://github.com/enquirer/enquirer-question",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/enquirer-question",
@@ -28,7 +28,7 @@
     "extend-shallow": "^2.0.1",
     "kind-of": "^3.0.4",
     "lazy-cache": "^2.0.1",
-    "prompt-choices": "^0.1.0"
+    "prompt-choices": "^0.2.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
