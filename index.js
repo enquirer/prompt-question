@@ -67,7 +67,7 @@ Question.prototype.clone = function() {
  */
 
 Question.prototype.addChoices = function(choices) {
-  this.choices = choices;
+  this.choices = new Choices(choices, this.answers);
   return this;
 };
 
@@ -133,30 +133,15 @@ Question.prototype.getAnswer = function(val) {
 
 /**
  * Getter that returns true if a `default` value has been defined.
- * @return {Boolean}
+ *
+ * @name .hasDefault
+ * @return {Boolean} True if a default value is defined.
  * @api public
  */
 
 Object.defineProperty(Question.prototype, 'hasDefault', {
   get: function() {
     return this.default != null && !!String(this.default);
-  }
-});
-
-/**
- * Getter that returns true if a `default` value has been defined.
- * @return {Boolean}
- * @api public
- */
-
-Object.defineProperty(Question.prototype, 'choices', {
-  configurable: true,
-  enumerable: true,
-  set: function(choices) {
-    utils.define(this, '_choices', choices);
-  },
-  get: function() {
-    return new Choices(this._choices);
   }
 });
 
