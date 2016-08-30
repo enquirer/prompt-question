@@ -1,4 +1,4 @@
-# enquirer-question [![NPM version](https://img.shields.io/npm/v/enquirer-question.svg?style=flat)](https://www.npmjs.com/package/enquirer-question) [![NPM downloads](https://img.shields.io/npm/dm/enquirer-question.svg?style=flat)](https://npmjs.org/package/enquirer-question) [![Build Status](https://img.shields.io/travis/enquirer/enquirer-question.svg?style=flat)](https://travis-ci.org/enquirer/enquirer-question)
+# prompt-question [![NPM version](https://img.shields.io/npm/v/prompt-question.svg?style=flat)](https://www.npmjs.com/package/prompt-question) [![NPM downloads](https://img.shields.io/npm/dm/prompt-question.svg?style=flat)](https://npmjs.org/package/prompt-question) [![Build Status](https://img.shields.io/travis/enquirer/prompt-question.svg?style=flat)](https://travis-ci.org/enquirer/prompt-question)
 
 > Question object, used by Enquirer and prompt plugins.
 
@@ -7,15 +7,15 @@
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm install --save enquirer-question
+$ npm install --save prompt-question
 ```
 
 ## Usage
 
-The main export is a constructor function that is used to create new `Question` objects, which are used in prompts by [enquirer](https://github.com/jonschlinkert/enquirer).
+The main export is a constructor function that is used to create new `Question` objects, which are used in prompts by [base-prompt][].
 
 ```js
-var Question = require('enquirer-question');
+var Question = require('prompt-question');
 var question = new Question('color', 'What is favorite color?');
 ```
 
@@ -74,7 +74,7 @@ $ npm install -d && npm test
 ### License
 
 Copyright © 2016, [Jon Schlinkert](https://github.com/jonschlinkert).
-Released under the [MIT license](https://github.com/enquirer/enquirer-question/blob/master/LICENSE).
+Released under the [MIT license](https://github.com/enquirer/prompt-question/blob/master/LICENSE).
 
 ***
 

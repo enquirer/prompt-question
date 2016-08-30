@@ -1,12 +1,12 @@
 {
-  "name": "enquirer-question",
+  "name": "prompt-question",
   "description": "Question object, used by Enquirer and prompt plugins.",
-  "version": "0.3.0",
-  "homepage": "https://github.com/enquirer/enquirer-question",
+  "version": "0.1.0",
+  "homepage": "https://github.com/enquirer/prompt-question",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "enquirer/enquirer-question",
+  "repository": "enquirer/prompt-question",
   "bugs": {
-    "url": "https://github.com/enquirer/enquirer-question/issues"
+    "url": "https://github.com/enquirer/prompt-question/issues"
   },
   "license": "MIT",
   "files": [
