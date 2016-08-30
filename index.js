@@ -43,6 +43,12 @@ function assign(obj, options) {
   utils.define(obj, 'cache', cache);
 }
 
+Object.defineProperty(Question.prototype, 'hasDefault', {
+  get: function() {
+    return this.default != null && !!String(this.default);
+  }
+});
+
 /**
  * Expose `Question`
  */
