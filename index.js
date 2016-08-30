@@ -14,6 +14,9 @@ function Question(name, message, options) {
   this.isQuestion = true;
   this.type = 'input';
   assign(this, {name: name, message: message, options: options});
+  if (this.choices) {
+    this.addChoices(this.choices);
+  }
 }
 
 Question.prototype.clone = function() {
@@ -23,6 +26,11 @@ Question.prototype.clone = function() {
 
 Question.prototype.addChoices = function(choices, answers) {
   this.choices = new Choices(choices, answers);
+  return this;
+};
+
+Question.prototype.toggleChoices = function(idx) {
+  this.choices.toggleChoices(idx);
   return this;
 };
 
