@@ -4,3 +4,5 @@ var question = new Question('color', 'What is your favorite color?', {
 });
 // question.toggleChoices(1);
 console.log(question.choices);
+
+console.log(question.getChoice('red'))

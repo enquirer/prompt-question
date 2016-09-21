@@ -1,5 +1,6 @@
 'use strict';
 
+var debug = require('debug')('prompt-question');
 var Choices = require('prompt-choices');
 var utils = require('./lib/utils');
 
@@ -22,6 +23,7 @@ var utils = require('./lib/utils');
  */
 
 function Question(name, message, options) {
+  debug('initializing from <%s>', __filename);
   if (arguments.length === 0) {
     throw new TypeError('expected a string or object');
   }
@@ -30,6 +32,7 @@ function Question(name, message, options) {
     return name;
   }
 
+  this.options = {};
   this.type = 'input';
   utils.define(this, 'isQuestion', true);
   utils.assign(this, {
@@ -67,7 +70,9 @@ Question.prototype.clone = function() {
  */
 
 Question.prototype.addChoices = function(choices) {
-  this.choices = new Choices(choices, this.answers);
+  if (Array.isArray(choices)) {
+    utils.define(this, '_choices', new Choices(choices, this));
+  }
   return this;
 };
 
@@ -75,34 +80,18 @@ Question.prototype.addChoices = function(choices) {
  * Toggle the `checked` value of the the choice at the given `idx`.
  *
  * ```js
- * question.toggleChoice(1);
+ * question.toggle(1);
+ * // "radio" mode
+ * question.toggle(1, true);
  * ```
  * @param {Number} `idx` The index of the choice to toggle.
  * @return {Object} Returns the question instance for chaining
  * @api public
  */
 
-Question.prototype.toggleChoice = function(idx) {
-  if (typeof this.choices.toggleChoice === 'function') {
-    this.choices.toggleChoice(idx);
-  }
-  return this;
-};
-
-/**
- * Enable the choice at the given `idx` and disable all other choices.
- *
- * ```js
- * question.toggleChoices(3);
- * ```
- * @param {Number} `idx`
- * @return {Object} Returns the question instance for chaining
- * @api public
- */
-
-Question.prototype.toggleChoices = function(idx) {
-  if (typeof this.choices.toggleChoices === 'function') {
-    this.choices.toggleChoices(idx);
+Question.prototype.toggle = function(idx, radio) {
+  if (typeof this.choices.toggle === 'function') {
+    this.choices.toggle(idx, radio);
   }
   return this;
 };
@@ -132,6 +121,36 @@ Question.prototype.getAnswer = function(val) {
 };
 
 /**
+ * Get the given choice from `questions.choices`.
+ *
+ * ```js
+ * var Question = require('prompt-question');
+ * var question = new Question('color', 'What is your favorite color?', {
+ *   choices: ['red', 'blue', 'yellow']
+ * });
+ * console.log(question.getChoice('red'));
+ * //=> Choice { name: 'red', short: 'red', value: 'red', checked: false }
+ * ```
+ *
+ * @param {any} `val`
+ * @return {any}
+ * @api public
+ */
+
+Question.prototype.getChoice = function() {
+  return this.choices.getChoice.apply(this.choices, arguments);
+};
+
+/**
+ * Create a separator using [choices-separator][].
+ * @api public
+ */
+
+Question.prototype.separator = function() {
+  return this.choices.separator.apply(this.choices, arguments);
+};
+
+/**
  * Getter that returns true if a `default` value has been defined.
  *
  * @name .hasDefault
@@ -144,6 +163,36 @@ Object.defineProperty(Question.prototype, 'hasDefault', {
     return this.default != null && !!String(this.default);
   }
 });
+
+/**
+ * Getter that returns the list of choices for the current question, if applicable.
+ *
+ * @name .choices
+ * @return {Array}
+ * @api public
+ */
+
+Object.defineProperty(Question.prototype, 'choices', {
+  set: function(choices) {
+    this.addChoices(choices);
+  },
+  get: function() {
+    return this._choices;
+  }
+});
+
+/**
+ * Create a new `Separator` object. See [choices-separator][] for more details.
+ *
+ * ```js
+ * new Question.Separator();
+ * ```
+ * @param {String} `separator` Optionally pass a string to use as the separator.
+ * @return {Object} Returns a separator object.
+ * @api public
+ */
+
+Question.Separator = Choices.Separator;
 
 /**
  * Expose `Question`

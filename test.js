@@ -23,12 +23,12 @@ describe('enquirer-question', function() {
 
   it('should create a new question from `name`', function() {
     var question = new Question('color');
-    assert.deepEqual(question, { type: 'input', name: 'color', message: 'color' });
+    assert.deepEqual(question, { type: 'input', name: 'color', message: 'color', options: {} });
   });
 
   it('should create a new question from `name` and `message`', function() {
     var question = new Question('color', 'Favorite color?');
-    assert.deepEqual(question, { type: 'input', name: 'color', message: 'Favorite color?' });
+    assert.deepEqual(question, { type: 'input', name: 'color', message: 'Favorite color?', options: {} });
   });
 
   it('should create a new question from `name`, `message` and `options`', function() {
@@ -37,66 +37,33 @@ describe('enquirer-question', function() {
       type: 'input',
       name: 'color',
       message: 'Favorite color?',
-      default: 'blue'
+      default: 'blue',
+      options: {}
     });
   });
 
-  it('should add normalized choices when passed to the constructor', function() {
+  it('should add normalized choices to `items` when passed to the constructor', function() {
     var question = new Question('color', 'Favorite color?', {
       default: 'blue',
       choices: ['foo', 'bar', 'baz']
     });
 
-    assert.deepEqual(question.choices, {
-      original: ['foo', 'bar', 'baz'],
-      keys: ['foo', 'bar', 'baz'],
-      items: [
-        {
-          disabled: false,
-          checked: false,
-          name: 'foo',
-          value: 'foo',
-          short: 'foo'
-        },
-        {
-          disabled: false,
-          checked: false,
-          name: 'bar',
-          value: 'bar',
-          short: 'bar'
-        },
-        {
-          disabled: false,
-          checked: false,
-          name: 'baz',
-          value: 'baz',
-          short: 'baz'
-        }
-      ],
-      keymap: {
-        foo: {
-           disabled: false,
-           checked: false,
-           name: 'foo',
-           value: 'foo',
-           short: 'foo'
-        },
-        bar: {
-           disabled: false,
-           checked: false,
-           name: 'bar',
-           value: 'bar',
-           short: 'bar'
-        },
-        baz: {
-           disabled: false,
-           checked: false,
-           name: 'baz',
-           value: 'baz',
-           short: 'baz'
-        }
-      }
-    });
+    assert.deepEqual(question.choices.items, [{
+      name: 'foo',
+      short: 'foo',
+      value: 'foo',
+      checked: false
+    }, {
+      name: 'bar',
+      short: 'bar',
+      value: 'bar',
+      checked: false
+    }, {
+      name: 'baz',
+      short: 'baz',
+      value: 'baz',
+      checked: false
+    }]);
   });
 
   it('should add normalized choices when set directly on `choices`', function() {
@@ -106,55 +73,21 @@ describe('enquirer-question', function() {
 
     question.choices = ['foo', 'bar', 'baz'];
 
-    assert.deepEqual(question.choices, {
-      original: ['foo', 'bar', 'baz'],
-      keys: ['foo', 'bar', 'baz'],
-      items: [
-        {
-          disabled: false,
-          checked: false,
-          name: 'foo',
-          value: 'foo',
-          short: 'foo'
-        },
-        {
-          disabled: false,
-          checked: false,
-          name: 'bar',
-          value: 'bar',
-          short: 'bar'
-        },
-        {
-          disabled: false,
-          checked: false,
-          name: 'baz',
-          value: 'baz',
-          short: 'baz'
-        }
-      ],
-      keymap: {
-        foo: {
-           disabled: false,
-           checked: false,
-           name: 'foo',
-           value: 'foo',
-           short: 'foo'
-        },
-        bar: {
-           disabled: false,
-           checked: false,
-           name: 'bar',
-           value: 'bar',
-           short: 'bar'
-        },
-        baz: {
-           disabled: false,
-           checked: false,
-           name: 'baz',
-           value: 'baz',
-           short: 'baz'
-        }
-      }
-    });
+    assert.deepEqual(question.choices.items, [{
+      name: 'foo',
+      short: 'foo',
+      value: 'foo',
+      checked: false
+    }, {
+      name: 'bar',
+      short: 'bar',
+      value: 'bar',
+      checked: false
+    }, {
+      name: 'baz',
+      short: 'baz',
+      value: 'baz',
+      checked: false
+    }]);
   });
 });
