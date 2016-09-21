@@ -11,9 +11,7 @@
   "license": "MIT",
   "files": [
     "index.js",
-    "lib",
-    "LICENSE",
-    "README.md"
+    "lib"
   ],
   "main": "index.js",
   "engines": {
@@ -24,11 +22,12 @@
   },
   "dependencies": {
     "clone-deep": "^0.2.4",
+    "debug": "^2.2.0",
     "define-property": "^0.2.5",
     "extend-shallow": "^2.0.1",
     "kind-of": "^3.0.4",
     "lazy-cache": "^2.0.1",
-    "prompt-choices": "^0.3.0"
+    "prompt-choices": "^0.4.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -78,9 +77,9 @@
     ],
     "related": {
       "list": [
+        "choices-separator",
         "enquirer",
         "prompt-choices",
-        "choices-separator",
         "readline-utils"
       ]
     },
