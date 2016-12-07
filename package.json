@@ -22,17 +22,16 @@
   },
   "dependencies": {
     "clone-deep": "^0.2.4",
-    "debug": "^2.2.0",
+    "debug": "^2.3.3",
     "define-property": "^0.2.5",
     "extend-shallow": "^2.0.1",
-    "kind-of": "^3.0.4",
-    "lazy-cache": "^2.0.1",
-    "prompt-choices": "^0.4.0"
+    "kind-of": "^3.1.0",
+    "lazy-cache": "^2.0.2",
+    "prompt-choices": "^0.4.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
-    "gulp-format-md": "^0.1.10",
     "gulp-istanbul": "^1.1.1",
     "gulp-mocha": "^3.0.1",
     "gulp-unused": "^0.2.0",
