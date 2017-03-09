@@ -34,6 +34,7 @@ function Question(name, message, options) {
 
   this.options = {};
   this.type = 'input';
+  utils.define(this, 'Choices', Choices);
   utils.define(this, 'isQuestion', true);
   utils.assign(this, {
     name: name,
@@ -70,9 +71,7 @@ Question.prototype.clone = function() {
  */
 
 Question.prototype.addChoices = function(choices) {
-  if (Array.isArray(choices)) {
-    utils.define(this, '_choices', new Choices(choices, this));
-  }
+  utils.define(this, '_choices', new Choices(utils.arrayify(choices), this));
   return this;
 };
 
