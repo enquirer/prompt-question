@@ -1,9 +1,9 @@
 'use strict';
 
 require('mocha');
-var util = require('util');
 var assert = require('assert');
 var Question = require('./');
+var question;
 
 describe('prompt-question', function() {
   it('should export a function', function() {
@@ -12,7 +12,7 @@ describe('prompt-question', function() {
 
   it('should throw an error when invalid args are passed', function(cb) {
     try {
-      new Question();
+      question = new Question();
       cb(new Error('expected an error'));
     } catch (err) {
       assert(err);
@@ -22,17 +22,17 @@ describe('prompt-question', function() {
   });
 
   it('should create a new question from `name`', function() {
-    var question = new Question('color');
+    question = new Question('color');
     assert.deepEqual(question, { type: 'input', name: 'color', message: 'color', options: {} });
   });
 
   it('should create a new question from `name` and `message`', function() {
-    var question = new Question('color', 'Favorite color?');
+    question = new Question('color', 'Favorite color?');
     assert.deepEqual(question, { type: 'input', name: 'color', message: 'Favorite color?', options: {} });
   });
 
   it('should create a new question from `name`, `message` and `options`', function() {
-    var question = new Question('color', 'Favorite color?', {default: 'blue'});
+    question = new Question('color', 'Favorite color?', {default: 'blue'});
     assert.deepEqual(question, {
       type: 'input',
       name: 'color',
@@ -43,7 +43,7 @@ describe('prompt-question', function() {
   });
 
   it('should add normalized choices to `items` when passed to the constructor', function() {
-    var question = new Question('color', 'Favorite color?', {
+    question = new Question('color', 'Favorite color?', {
       default: 'blue',
       choices: ['foo', 'bar', 'baz']
     });
@@ -67,7 +67,7 @@ describe('prompt-question', function() {
   });
 
   it('should add normalized choices when set directly on `choices`', function() {
-    var question = new Question('color', 'Favorite color?', {
+    question = new Question('color', 'Favorite color?', {
       default: 'blue'
     });
 

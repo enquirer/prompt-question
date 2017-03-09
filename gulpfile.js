@@ -12,21 +12,21 @@ gulp.task('coverage', function() {
     .pipe(istanbul.hookRequire());
 });
 
-gulp.task('mocha', ['coverage'], function() {
-  return gulp.src('test/*.js')
+gulp.task('mocha', gulp.series('coverage', function() {
+  return gulp.src('test.js')
     .pipe(mocha())
     .pipe(istanbul.writeReports());
-});
+}));
 
 gulp.task('eslint', function() {
-  return gulp.src(['*.js', 'lib/*.js', 'test/*.js'])
+  return gulp.src(['*.js', 'lib/*.js'])
     .pipe(eslint())
     .pipe(eslint.format());
 });
 
 gulp.task('unused', function() {
-  return gulp.src(['index.js', 'lib/**/*.js'])
+  return gulp.src(['index.js', 'lib/*.js'])
     .pipe(unused({utils: 'lib/utils.js'}));
 });
 
-gulp.task('default', ['mocha', 'eslint']);
+gulp.task('default', gulp.series(['mocha', 'eslint']));
