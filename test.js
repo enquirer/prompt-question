@@ -5,7 +5,7 @@ var util = require('util');
 var assert = require('assert');
 var Question = require('./');
 
-describe('enquirer-question', function() {
+describe('prompt-question', function() {
   it('should export a function', function() {
     assert.equal(typeof Question, 'function');
   });
