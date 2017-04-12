@@ -28,7 +28,7 @@ function Question(name, message, options) {
     throw new TypeError('expected a string or object');
   }
 
-  if (utils.isObject(name) && name.isQuestion) {
+  if (Question.isQuestion(name)) {
     return name;
   }
 
@@ -192,6 +192,14 @@ Object.defineProperty(Question.prototype, 'choices', {
  */
 
 Question.Separator = Choices.Separator;
+
+/**
+ * Returns true if `val` is an instance of `Question`
+ */
+
+Question.isQuestion = function(val) {
+  return val instanceof Question || (utils.isObject(val) && val.isQuestion);
+};
 
 /**
  * Expose `Question`
