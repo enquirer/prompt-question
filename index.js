@@ -181,6 +181,18 @@ Object.defineProperty(Question.prototype, 'choices', {
 });
 
 /**
+ * Returns true if `question` is a valid question object.
+ *
+ * @param {Object} `question`
+ * @return {Boolean}
+ * @api public
+ */
+
+Question.isQuestion = function(question) {
+  return utils.isObject(question) && question.isQuestion;
+};
+
+/**
  * Create a new `Separator` object. See [choices-separator][] for more details.
  *
  * ```js
@@ -192,14 +204,6 @@ Object.defineProperty(Question.prototype, 'choices', {
  */
 
 Question.Separator = Choices.Separator;
-
-/**
- * Returns true if `val` is an instance of `Question`
- */
-
-Question.isQuestion = function(val) {
-  return val instanceof Question || (utils.isObject(val) && val.isQuestion);
-};
 
 /**
  * Expose `Question`
