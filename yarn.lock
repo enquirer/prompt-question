@@ -1532,6 +1532,10 @@ is-valid-glob@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/is-valid-glob/-/is-valid-glob-0.3.0.tgz#d4b55c69f51886f9b65c70d6c2622d37e29f48fe"
 
+is-value@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-value/-/is-value-1.0.1.tgz#36c1d93eefb1962dfae250bce47e822b8048984a"
+
 is-windows@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-0.2.0.tgz#de1aa6d63ea29dd248737b69f1ff8b8002d2108c"
@@ -1651,6 +1655,10 @@ kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.0.tgz#b58abe4d5c044ad33726a8c1525b48cf891bff07"
   dependencies:
     is-buffer "^1.1.5"
+
+koalas@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/koalas/-/koalas-1.0.2.tgz#318433f074235db78fae5661a02a8ca53ee295cd"
 
 lazy-cache@^0.2.3:
   version "0.2.7"
@@ -2220,9 +2228,9 @@ progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
 
-prompt-choices@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/prompt-choices/-/prompt-choices-0.5.1.tgz#8a579391314db641d7129c1bb9582b49e7e1b62e"
+prompt-choices@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/prompt-choices/-/prompt-choices-0.5.2.tgz#90092d4ae429a7b3e8f725bd7da056bdaf9100a6"
   dependencies:
     arr-flatten "^1.0.3"
     choices-separator "^0.1.2"

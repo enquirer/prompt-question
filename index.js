@@ -1,6 +1,7 @@
 'use strict';
 
 var debug = require('debug')('prompt-question');
+var koalas = require('koalas');
 var Choices = require('prompt-choices');
 var utils = require('./lib/utils');
 
@@ -34,6 +35,7 @@ function Question(name, message, options) {
 
   this.options = {};
   this.type = 'input';
+
   utils.define(this, 'Choices', Choices);
   utils.define(this, 'isQuestion', true);
   utils.assign(this, {
@@ -99,7 +101,12 @@ Question.prototype.toggle = function(idx, radio) {
  * Returns the given `val` or `question.default` if `val` is undefined or null.
  *
  * ```js
- * var question = new Question({name: 'first', message: 'First name'?, default: 'Bob'});
+ * var question = new Question({
+ *   name: 'first',
+ *   message: 'First name'?,
+ *   default: 'Bob'
+ * });
+ *
  * console.log(question.getAnswer());
  * //=> 'Bob'
  * console.log(question.getAnswer('Joe'));
@@ -116,7 +123,7 @@ Question.prototype.toggle = function(idx, radio) {
  */
 
 Question.prototype.getAnswer = function(val) {
-  return (val != null && !!String(val)) ? val : (this.default || '');
+  return koalas(val, this.default);
 };
 
 /**
@@ -159,7 +166,7 @@ Question.prototype.separator = function() {
 
 Object.defineProperty(Question.prototype, 'hasDefault', {
   get: function() {
-    return this.default != null && !!String(this.default);
+    return this.default != null;
   }
 });
 
