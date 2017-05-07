@@ -56,8 +56,8 @@ function Question(name, message, options) {
  */
 
 Question.prototype.clone = function() {
-  var cached = utils.clone(this.cache);
-  return new this.constructor(cached);
+  var cache = utils.clone(this.cache);
+  return new this.constructor(cache);
 };
 
 /**
@@ -171,7 +171,8 @@ Object.defineProperty(Question.prototype, 'hasDefault', {
 });
 
 /**
- * Getter that returns the list of choices for the current question, if applicable.
+ * Getter that returns the list of choices for the
+ * current question, if applicable.
  *
  * @name .choices
  * @return {Array}
@@ -200,7 +201,8 @@ Question.isQuestion = function(question) {
 };
 
 /**
- * Create a new `Separator` object. See [choices-separator][] for more details.
+ * Create a new `Separator` object. See [choices-separator][]
+ * for more details.
  *
  * ```js
  * new Question.Separator();
