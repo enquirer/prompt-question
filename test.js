@@ -86,7 +86,8 @@ describe('prompt-question', function() {
 
     it('should define a separator', function() {
       question = new Question('color');
-      assert.equal(question.separator('+++').line, '\u001b[2m+++\u001b[22m');
+      assert.equal(question.separator('+++').toString(), '+++');
+      assert.equal(question.separator('+++').line, '+++');
     });
 
     it('should toggle all choices', function() {
