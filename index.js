@@ -212,6 +212,20 @@ Question.isQuestion = function(question) {
 };
 
 /**
+ * Create a new `Choices` object. See [prompt-choices][]
+ * for more details.
+ *
+ * ```js
+ * var choices = new Question.Choices(['foo', 'bar', 'baz']);
+ * ```
+ * @param {Array} `choices` Array of choices
+ * @return {Object} Returns an intance of Choices.
+ * @api public
+ */
+
+Question.Choices = Choices;
+
+/**
  * Create a new `Separator` object. See [choices-separator][]
  * for more details.
  *
