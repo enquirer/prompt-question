@@ -1,8 +1,8 @@
 'use strict';
 
 var debug = require('debug')('prompt-question');
-var koalas = require('koalas');
 var Choices = require('prompt-choices');
+var koalas = require('koalas');
 var utils = require('./lib/utils');
 
 /**
@@ -35,6 +35,15 @@ function Question(name, message, options) {
 
   this.options = {};
   this.type = 'input';
+
+  if (Array.isArray(message)) {
+    options = { choices: message };
+    message = name;
+  }
+
+  if (Array.isArray(options)) {
+    options = { choices: options };
+  }
 
   utils.define(this, 'Choices', Choices);
   utils.define(this, 'isQuestion', true);
@@ -95,26 +104,6 @@ Question.prototype.addChoice = function() {
 };
 
 /**
- * Toggle the `checked` value of the the choice at the given `idx`.
- *
- * ```js
- * question.toggle(1);
- * // "radio" mode
- * question.toggle(1, true);
- * ```
- * @param {Number} `idx` The index of the choice to toggle.
- * @return {Object} Returns the question instance for chaining
- * @api public
- */
-
-Question.prototype.toggle = function(idx, radio) {
-  if (typeof this.choices.toggle === 'function') {
-    this.choices.toggle(idx, radio);
-  }
-  return this;
-};
-
-/**
  * Returns the given `val` or `question.default` if `val` is undefined or null.
  *
  * ```js
@@ -161,7 +150,7 @@ Question.prototype.getAnswer = function(val) {
  */
 
 Question.prototype.getChoice = function() {
-  return this.choices.getChoice.apply(this.choices, arguments);
+  return this.choices.get.apply(this.choices, arguments);
 };
 
 /**
@@ -200,11 +189,11 @@ Object.defineProperty(Question.prototype, 'choices', {
   configurable: true,
   enumerable: true,
   set: function(choices) {
-    this._choices = new Choices(choices);
+    this._choices = new Choices(choices, this.options);
   },
   get: function() {
     if (typeof this._choices === 'undefined') {
-      this._choices = new Choices(this.options.choices);
+      this._choices = new Choices(this.options.choices, this.options);
     }
     return this._choices;
   }

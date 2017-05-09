@@ -17,6 +17,18 @@ describe('prompt-question', function() {
       });
     });
 
+    it('should return true if value is a Question', function() {
+      question = new Question('color');
+      assert(Question.isQuestion(question));
+      assert(Question.isQuestion({name: 'foo', isQuestion: true}));
+    });
+
+    it('should return false if value is not a Question', function() {
+      question = new Question('color');
+      assert(!Question.isQuestion('foo'));
+      assert(!Question.isQuestion({name: 'foo'}));
+    });
+
     it('should create a new question from `name`', function() {
       question = new Question('color');
       assert.deepEqual(question, {
@@ -25,6 +37,68 @@ describe('prompt-question', function() {
         message: 'color',
         options: {}
       });
+    });
+
+    it('should return an existing Question instance', function() {
+      var foo = new Question('foo');
+      question = new Question(foo);
+      assert.deepEqual(question, foo);
+    });
+
+    it('should clone a question', function() {
+      question = new Question('color');
+      var foo = question.clone();
+      assert(question !== foo);
+      assert.deepEqual(foo, {
+        type: 'input',
+        name: 'color',
+        message: 'color',
+        options: {}
+      });
+    });
+
+    it('should add choices to a question', function() {
+      question = new Question('color', 'color?', ['red', 'blue']);
+      assert.equal(question.message, 'color?');
+      assert.deepEqual(question.choices.keys, ['red', 'blue']);
+    });
+
+    it('should add choices to a question after instantiation', function() {
+      question = new Question('color');
+      question.addChoices(['red', 'blue']);
+      assert.deepEqual(question.choices.keys, ['red', 'blue']);
+    });
+
+    it('should add choice to a question after instantiation', function() {
+      question = new Question('color');
+      question.addChoices(['red', 'blue']);
+      question.addChoice('green');
+      assert.deepEqual(question.choices.keys, ['red', 'blue', 'green']);
+    });
+
+    it('should get a choice', function() {
+      question = new Question('color');
+      question.addChoices(['red', 'blue']);
+      var choice = question.getChoice('red');
+      assert(choice);
+      assert.equal(choice.name, 'red');
+    });
+
+    it('should define a separator', function() {
+      question = new Question('color');
+      assert.equal(question.separator('+++').line, '\u001b[2m+++\u001b[22m');
+    });
+
+    it('should toggle all choices', function() {
+      question = new Question('foo', ['foo', 'bar', 'baz']);
+      question.choices.toggle();
+      assert.equal(question.choices.get('foo').checked, true);
+      assert.equal(question.choices.get('bar').checked, true);
+      assert.equal(question.choices.get('baz').checked, true);
+      question.choices.toggle();
+      assert.equal(question.choices.get('foo').checked, false);
+      assert.equal(question.choices.get('bar').checked, false);
+      assert.equal(question.choices.get('baz').checked, false);
     });
 
     it('should create a new question from `name` and `message`', function() {
