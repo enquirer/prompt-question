@@ -72,8 +72,25 @@ Question.prototype.clone = function() {
  * @api public
  */
 
-Question.prototype.addChoices = function(choices) {
-  utils.define(this, '_choices', new Choices(utils.arrayify(choices), this));
+Question.prototype.addChoices = function() {
+  this.choices.addChoices.apply(this.choices, arguments);
+  return this;
+};
+
+/**
+ * Add a choice to `question.choices` array.
+ * See [prompt-choices][] for more details.
+ *
+ * ```js
+ * question.addChoice('foo');
+ * ```
+ * @param {String|Object} `choice`
+ * @return {Object} Returns the question instance for chaining
+ * @api public
+ */
+
+Question.prototype.addChoice = function() {
+  this.choices.addChoice.apply(this.choices, arguments);
   return this;
 };
 
@@ -180,10 +197,15 @@ Object.defineProperty(Question.prototype, 'hasDefault', {
  */
 
 Object.defineProperty(Question.prototype, 'choices', {
+  configurable: true,
+  enumerable: true,
   set: function(choices) {
-    this.addChoices(choices);
+    this._choices = new Choices(choices);
   },
   get: function() {
+    if (typeof this._choices === 'undefined') {
+      this._choices = new Choices(this.options.choices);
+    }
     return this._choices;
   }
 });
