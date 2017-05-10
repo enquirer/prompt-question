@@ -86,7 +86,9 @@
     },
     "reflinks": [
       "verb",
-      "verb-generate-readme"
+      "verb-generate-readme",
+      "base-prompt",
+      "prompt-choices"
     ],
     "lint": {
       "reflinks": true
