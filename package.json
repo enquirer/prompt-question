@@ -28,7 +28,7 @@
     "kind-of": "^3.2.0",
     "koalas": "^1.0.2",
     "lazy-cache": "^2.0.2",
-    "prompt-choices": "^1.0.0"
+    "prompt-choices": "^2.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
