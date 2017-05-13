@@ -129,6 +129,9 @@ Question.prototype.addChoice = function() {
  */
 
 Question.prototype.getAnswer = function(val) {
+  if (this.choices && this.choices.length) {
+    return this.choices.checked;
+  }
   return koalas(val, this.default);
 };
 

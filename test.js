@@ -203,6 +203,13 @@ describe('prompt-question', function() {
       assert.equal(quest().getAnswer(), 'blue');
     });
 
+    it('should get checked choices', function() {
+      var question = new Question('colors', ['foo', 'bar', 'baz']);
+      question.choices.check([1, 2]);
+
+      assert.deepEqual(question.getAnswer(), ['bar', 'baz']);
+    });
+
     it('should return the default when answer is null', function() {
       assert.equal(quest().getAnswer(null), 'blue');
     });
@@ -217,6 +224,10 @@ describe('prompt-question', function() {
 
     it('should return a numerical answer', function() {
       assert.equal(quest().getAnswer(0), 0);
+    });
+
+    it('should return an empty string', function() {
+      assert.equal(quest().getAnswer(''), '');
     });
   });
 });
