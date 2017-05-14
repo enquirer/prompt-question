@@ -1,6 +1,7 @@
 'use strict';
 
 var debug = require('debug')('prompt-question');
+var clone = require('clone-deep');
 var Choices = require('prompt-choices');
 var koalas = require('koalas');
 var utils = require('./lib/utils');
@@ -65,8 +66,7 @@ function Question(name, message, options) {
  */
 
 Question.prototype.clone = function() {
-  var cache = utils.clone(this.cache);
-  return new this.constructor(cache);
+  return new this.constructor(clone(this.cache));
 };
 
 /**
@@ -129,7 +129,10 @@ Question.prototype.addChoice = function() {
  */
 
 Question.prototype.getAnswer = function(val) {
-  if (this.choices && this.choices.length) {
+  if (this._choices && !this.choices.checked.length && this.default != null) {
+    this.choices.check(this.default);
+  }
+  if (this._choices && this.choices.length) {
     return this.choices.checked;
   }
   return koalas(val, this.default);
@@ -211,7 +214,7 @@ Object.defineProperty(Question.prototype, 'choices', {
  */
 
 Question.isQuestion = function(question) {
-  return utils.isObject(question) && question.isQuestion;
+  return utils.isObject(question) && question.isQuestion === true;
 };
 
 /**
