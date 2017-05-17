@@ -6,7 +6,7 @@ var Question = require('./');
 var question;
 
 describe('prompt-question', function() {
-  describe('Question constructor', function() {
+  describe('constructor', function() {
     it('should export a function', function() {
       assert.equal(typeof Question, 'function');
     });
@@ -17,6 +17,14 @@ describe('prompt-question', function() {
       });
     });
 
+    it('should return an existing Question instance', function() {
+      var foo = new Question('foo');
+      question = new Question(foo);
+      assert.deepEqual(question, foo);
+    });
+  });
+
+  describe('Question.isQuestion', function() {
     it('should return true if value is a Question', function() {
       question = new Question('color');
       assert(Question.isQuestion(question));
@@ -28,8 +36,10 @@ describe('prompt-question', function() {
       assert(!Question.isQuestion('foo'));
       assert(!Question.isQuestion({name: 'foo'}));
     });
+  });
 
-    it('should create a new question from `name`', function() {
+  describe('question', function() {
+    it('should create a new question from "name"', function() {
       question = new Question('color');
       assert.deepEqual(question, {
         type: 'input',
@@ -39,12 +49,51 @@ describe('prompt-question', function() {
       });
     });
 
-    it('should return an existing Question instance', function() {
-      var foo = new Question('foo');
-      question = new Question(foo);
-      assert.deepEqual(question, foo);
+    it('should create a new question from "name" and "message"', function() {
+      question = new Question('color', 'Favorite color?');
+      assert.deepEqual(question, {
+        type: 'input',
+        name: 'color',
+        message: 'Favorite color?',
+        options: {}
+      });
     });
 
+    it('should create a question from "options"', function() {
+      question = new Question({name: 'color', message: 'Favorite color?', default: 'blue'});
+      assert.deepEqual(question, {
+        type: 'input',
+        name: 'color',
+        message: 'Favorite color?',
+        default: 'blue',
+        options: {}
+      });
+    });
+
+    it('should create a question from "name" and "options"', function() {
+      question = new Question('color', {message: 'Favorite color?', default: 'blue'});
+      assert.deepEqual(question, {
+        type: 'input',
+        name: 'color',
+        message: 'Favorite color?',
+        default: 'blue',
+        options: {}
+      });
+    });
+
+    it('should create a question from "name", "message" and "options"', function() {
+      question = new Question('color', 'Favorite color?', {default: 'blue'});
+      assert.deepEqual(question, {
+        type: 'input',
+        name: 'color',
+        message: 'Favorite color?',
+        default: 'blue',
+        options: {}
+      });
+    });
+  });
+
+  describe('.clone', function() {
     it('should clone a question', function() {
       question = new Question('color');
       var foo = question.clone();
@@ -56,7 +105,9 @@ describe('prompt-question', function() {
         options: {}
       });
     });
+  });
 
+  describe('choices', function() {
     it('should add choices to a question', function() {
       question = new Question('color', 'color?', ['red', 'blue']);
       assert.equal(question.message, 'color?');
@@ -100,27 +151,6 @@ describe('prompt-question', function() {
       assert.equal(question.choices.get('foo').checked, false);
       assert.equal(question.choices.get('bar').checked, false);
       assert.equal(question.choices.get('baz').checked, false);
-    });
-
-    it('should create a new question from `name` and `message`', function() {
-      question = new Question('color', 'Favorite color?');
-      assert.deepEqual(question, {
-        type: 'input',
-        name: 'color',
-        message: 'Favorite color?',
-        options: {}
-      });
-    });
-
-    it('should create a new question from `name`, `message` and `options`', function() {
-      question = new Question('color', 'Favorite color?', {default: 'blue'});
-      assert.deepEqual(question, {
-        type: 'input',
-        name: 'color',
-        message: 'Favorite color?',
-        default: 'blue',
-        options: {}
-      });
     });
 
     it('should add normalized choices to `items` when passed to the constructor', function() {

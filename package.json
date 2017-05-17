@@ -27,7 +27,6 @@
     "extend-shallow": "^2.0.1",
     "kind-of": "^3.2.0",
     "koalas": "^1.0.2",
-    "lazy-cache": "^2.0.2",
     "prompt-choices": "^2.0.0"
   },
   "devDependencies": {
@@ -85,8 +84,6 @@
       ]
     },
     "reflinks": [
-      "verb",
-      "verb-generate-readme",
       "base-prompt",
       "prompt-choices"
     ],

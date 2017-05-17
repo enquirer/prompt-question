@@ -1,8 +1,9 @@
 'use strict';
 
 var debug = require('debug')('prompt-question');
-var clone = require('clone-deep');
 var Choices = require('prompt-choices');
+var define = require('define-property');
+var clone = require('clone-deep');
 var koalas = require('koalas');
 var utils = require('./lib/utils');
 
@@ -12,7 +13,7 @@ var utils = require('./lib/utils');
  * ```js
  * var question = new Question('first', 'What is your first name?');
  * console.log(question);
- * // Question {
+ * // {
  * //   type: 'input',
  * //   name: 'color',
  * //   message: 'What is your favorite color?'
@@ -34,8 +35,8 @@ function Question(name, message, options) {
     return name;
   }
 
-  this.options = {};
   this.type = 'input';
+  this.options = {};
 
   if (Array.isArray(message)) {
     options = { choices: message };
@@ -46,13 +47,17 @@ function Question(name, message, options) {
     options = { choices: options };
   }
 
-  utils.define(this, 'Choices', Choices);
-  utils.define(this, 'isQuestion', true);
+  define(this, 'Choices', Choices);
+  define(this, 'isQuestion', true);
   utils.assign(this, {
     name: name,
     message: message,
     options: options
   });
+
+  if (!utils.isString(this.name)) {
+    throw new TypeError('expected name to be a non-empty string');
+  }
 }
 
 /**
