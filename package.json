@@ -21,22 +21,22 @@
     "test": "mocha"
   },
   "dependencies": {
-    "clone-deep": "^0.2.4",
-    "debug": "^2.6.6",
+    "clone-deep": "^0.3.0",
+    "debug": "^2.6.8",
     "define-property": "^1.0.0",
     "extend-shallow": "^2.0.1",
-    "kind-of": "^3.2.0",
+    "kind-of": "^4.0.0",
     "koalas": "^1.0.2",
-    "prompt-choices": "^2.0.0"
+    "prompt-choices": "^3.0.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-format-md": "^0.1.12",
     "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.0",
+    "gulp-mocha": "^3.0.1",
     "gulp-unused": "^0.2.1",
-    "mocha": "^3.3.0"
+    "mocha": "^3.4.1"
   },
   "keywords": [
     "answer",
