@@ -1,7 +1,7 @@
 {
   "name": "prompt-question",
   "description": "Question object, used by Enquirer and prompt plugins.",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "homepage": "https://github.com/enquirer/prompt-question",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/prompt-question",
