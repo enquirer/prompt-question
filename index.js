@@ -135,7 +135,8 @@ Question.prototype.addChoice = function() {
 
 Question.prototype.getAnswer = function(val) {
   if (this._choices && !this.choices.checked.length && this.default != null) {
-    this.choices.check(this.default);
+    this.choices.check(utils.decrement(this.default));
+    this.default = null;
   }
   if (this._choices && this.choices.length) {
     return this.choices.checked;
