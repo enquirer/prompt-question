@@ -71,7 +71,15 @@ function Question(name, message, options) {
  */
 
 Question.prototype.clone = function() {
-  return new this.constructor(clone(this.cache));
+  var keys = Object.keys(this);
+  var cloned = new this.constructor(clone(this.cache));
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (!(key in cloned)) {
+      cloned[key] = this[key];
+    }
+  }
+  return cloned;
 };
 
 /**
