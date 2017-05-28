@@ -15,7 +15,7 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.0.0"
   },
   "scripts": {
     "test": "mocha"
@@ -27,7 +27,7 @@
     "extend-shallow": "^2.0.1",
     "kind-of": "^4.0.0",
     "koalas": "^1.0.2",
-    "prompt-choices": "^3.0.3"
+    "prompt-choices": "^4.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
@@ -36,7 +36,7 @@
     "gulp-istanbul": "^1.1.1",
     "gulp-mocha": "^3.0.1",
     "gulp-unused": "^0.2.1",
-    "mocha": "^3.4.1"
+    "mocha": "^3.4.2"
   },
   "keywords": [
     "answer",
