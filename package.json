@@ -27,7 +27,7 @@
     "extend-shallow": "^2.0.1",
     "kind-of": "^4.0.0",
     "koalas": "^1.0.2",
-    "prompt-choices": "^4.0.0"
+    "prompt-choices": "^4.0.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
