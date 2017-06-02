@@ -1,6 +1,7 @@
 'use strict';
 
 var debug = require('debug')('prompt-question');
+var extend = require('extend-shallow');
 var Choices = require('prompt-choices');
 var define = require('define-property');
 var clone = require('clone-deep');
@@ -37,6 +38,7 @@ function Question(name, message, options) {
 
   this.type = 'input';
   this.options = {};
+  this.getDefault();
 
   if (Array.isArray(message)) {
     options = { choices: message };
@@ -141,6 +143,23 @@ Question.prototype.addChoice = function() {
  * @api public
  */
 
+Question.prototype.getDefault = function(val) {
+  var def = koalas(this.default, this.options.default, this.choices.default);
+  if (def == null) {
+    return def;
+  }
+  if (this.choices.length) {
+    var idx = this.choices.getIndex(def);
+    if (typeof idx === 'number') {
+      this.choices.default = idx;
+      this.choices.check(idx);
+      def = idx;
+    }
+  }
+  this.default = def;
+  return def;
+};
+
 Question.prototype.getAnswer = function(val) {
   if (this._choices && !this.choices.checked.length && this.default != null) {
     this.choices.check(utils.decrement(this.default));
@@ -208,11 +227,11 @@ Object.defineProperty(Question.prototype, 'choices', {
   configurable: true,
   enumerable: true,
   set: function(choices) {
-    this._choices = new Choices(choices, this.options);
+    define(this, '_choices', new Choices(choices, this));
   },
   get: function() {
-    if (typeof this._choices === 'undefined') {
-      this._choices = new Choices(this.options.choices, this.options);
+    if (this._choices == null) {
+      define(this, '_choices', new Choices(this.options.choices, this));
     }
     return this._choices;
   }
