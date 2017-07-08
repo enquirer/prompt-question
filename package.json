@@ -1,7 +1,7 @@
 {
   "name": "prompt-question",
   "description": "Question object, used by Enquirer and prompt plugins.",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "homepage": "https://github.com/enquirer/prompt-question",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "enquirer/prompt-question",
@@ -24,7 +24,6 @@
     "clone-deep": "^0.3.0",
     "debug": "^2.6.8",
     "define-property": "^1.0.0",
-    "extend-shallow": "^2.0.1",
     "kind-of": "^4.0.0",
     "koalas": "^1.0.2",
     "prompt-choices": "^4.0.3"
