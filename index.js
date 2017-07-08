@@ -56,10 +56,6 @@ function Question(name, message, options) {
     message: message,
     options: options
   });
-
-  if (!utils.isString(this.name)) {
-    throw new TypeError('expected name to be a non-empty string');
-  }
 }
 
 /**
@@ -215,11 +211,42 @@ Object.defineProperty(Question.prototype, 'hasDefault', {
 });
 
 /**
- * Getter that returns the list of choices for the
- * current question, if applicable.
+ * Getter/setter for the checkbox symbols to use.
  *
+ * ```js
+ * var question = new Question({
+ *   name: 'foo',
+ *   checkbox: {off: '[ ]', on: '[x]', disabled: 'X'}
+ * });
+ * // or
+ * question.checkbox = {off: '[ ]', on: '[x]', disabled: 'X'};
+ * ```
+ * @name .checkbox
+ * @return {Object} Checkbox object with `.on`, `.off` and `.disabled` properties.
+ * @api public
+ */
+
+Object.defineProperty(Question.prototype, 'checkbox', {
+  set: function(checkbox) {
+    if (isObject(checkbox)) {
+      throw new TypeError('expected checkbox symbols to be an object');
+    }
+    this.choices.checkbox = checkbox;
+  },
+  get: function() {
+    return this.choices.checkbox;
+  }
+});
+
+/**
+ * Getter/setter for getting and setting choices (if applicable).
+ *
+ * ```js
+ * var question = new Question();
+ * question.choices = ['a', 'b', 'c'];
+ * ```
  * @name .choices
- * @return {Array}
+ * @return {Object} Returns an instance of [prompt-choices]
  * @api public
  */
 
@@ -227,19 +254,32 @@ Object.defineProperty(Question.prototype, 'choices', {
   configurable: true,
   enumerable: true,
   set: function(choices) {
-    define(this, '_choices', new Choices(choices, this));
+    define(this, '_choices', choices);
   },
   get: function() {
+    if (typeof this._choices === 'function') {
+      this._choices = this._choices.call(this);
+    }
     if (this._choices == null) {
-      define(this, '_choices', new Choices(this.options.choices, this));
+      define(this, '_choices', this.options.choices);
+    }
+    if (!(this._choices instanceof Choices)) {
+      this._choices = new Choices(this._choices, this);
     }
     return this._choices;
   }
 });
 
 /**
- * Returns true if `question` is a valid question object.
+ * Static method that returns true if `question` is a valid question object.
  *
+ * ```js
+ * console.log(Question.isQuestion('foo'));
+ * //=> false
+ * console.log(Question.isQuestion(new Question('What is your name?')));
+ * //=> true
+ * ```
+ * @name Question.isQuestion
  * @param {Object} `question`
  * @return {Boolean}
  * @api public
@@ -250,12 +290,13 @@ Question.isQuestion = function(question) {
 };
 
 /**
- * Create a new `Choices` object. See [prompt-choices][]
+ * Static method for creating a new `Choices` object. See [prompt-choices][]
  * for more details.
  *
  * ```js
  * var choices = new Question.Choices(['foo', 'bar', 'baz']);
  * ```
+ * @name Question.choices
  * @param {Array} `choices` Array of choices
  * @return {Object} Returns an intance of Choices.
  * @api public
@@ -264,12 +305,13 @@ Question.isQuestion = function(question) {
 Question.Choices = Choices;
 
 /**
- * Create a new `Separator` object. See [choices-separator][]
- * for more details.
+ * Static method for creating a new `Separator` object.
+ * See [choices-separator][] for more details.
  *
  * ```js
  * new Question.Separator();
  * ```
+ * @name Question.Separator
  * @param {String} `separator` Optionally pass a string to use as the separator.
  * @return {Object} Returns a separator object.
  * @api public

@@ -114,17 +114,25 @@ describe('prompt-question', function() {
       assert.deepEqual(question.choices.keys, ['red', 'blue']);
     });
 
-    it('should add choices to a question after instantiation', function() {
-      question = new Question('color');
-      question.addChoices(['red', 'blue']);
-      assert.deepEqual(question.choices.keys, ['red', 'blue']);
-    });
-
     it('should add choice to a question after instantiation', function() {
       question = new Question('color');
       question.addChoices(['red', 'blue']);
       question.addChoice('green');
       assert.deepEqual(question.choices.keys, ['red', 'blue', 'green']);
+    });
+
+    it('should add choices with `.addChoices`', function() {
+      question = new Question('color');
+      question.addChoices(['red', 'blue']);
+      assert.deepEqual(question.choices.keys, ['red', 'blue']);
+    });
+
+    it('should allow choices to be defined as a function', function() {
+      question = new Question('color');
+      question.choices = function() {
+        return ['red', 'blue'];
+      };
+      assert.deepEqual(question.choices.keys, ['red', 'blue']);
     });
 
     it('should get a choice', function() {
