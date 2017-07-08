@@ -1,7 +1,6 @@
 'use strict';
 
 var debug = require('debug')('prompt-question');
-var extend = require('extend-shallow');
 var Choices = require('prompt-choices');
 var define = require('define-property');
 var clone = require('clone-deep');
@@ -228,7 +227,7 @@ Object.defineProperty(Question.prototype, 'hasDefault', {
 
 Object.defineProperty(Question.prototype, 'checkbox', {
   set: function(checkbox) {
-    if (isObject(checkbox)) {
+    if (utils.isObject(checkbox)) {
       throw new TypeError('expected checkbox symbols to be an object');
     }
     this.choices.checkbox = checkbox;
