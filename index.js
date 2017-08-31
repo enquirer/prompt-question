@@ -3,6 +3,7 @@
 var debug = require('debug')('prompt-question');
 var Choices = require('prompt-choices');
 var define = require('define-property');
+var isObject = require('isobject');
 var clone = require('clone-deep');
 var koalas = require('koalas');
 var utils = require('./lib/utils');
